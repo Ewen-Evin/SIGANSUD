@@ -1,0 +1,42 @@
+# Symfony
+/var/
+/vendor/
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/public/build/
+
+# Composer
+/composer.phar
+
+# IDE
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Node
+/node_modules/
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+local.properties
+.gradle/
+build/
+*.iml
+.externalNativeBuild/
+.cxx/
+
+# Logs
+*.log
+npm-debug.log*
