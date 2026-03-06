@@ -3,7 +3,17 @@
 Projet SIO 2 - Parc animalier SIGEANSUD.
 Application de gestion des repas des animaux par espece.
 
-## Architecture
+## Structure du projet
+
+```
+AP4/
+├── api/            # API REST Symfony (backend commun)
+├── backoffice/     # Back-office Symfony (gestionnaires)
+├── mobile/         # Application Android (soignants)
+└── docs/           # Documentation
+```
+
+## Stack technique
 
 - **API REST** : Symfony 7 (backend commun)
 - **Back-office** : Symfony 7 (gestion soignants, especes, menus)
