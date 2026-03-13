@@ -25,6 +25,21 @@ class MenuController extends AbstractController
         return $this->json($data);
     }
 
+    #[Route('/api/menus/{id}', methods: ['GET'])]
+    public function show(int $id, EntityManagerInterface $em): JsonResponse
+    {
+        $menu = $em->getRepository(Menu::class)->find($id);
+        if (!$menu) {
+            return $this->json(['error' => 'Menu non trouve'], 404);
+        }
+
+        return $this->json([
+            'id' => $menu->getId(),
+            'aliment' => $menu->getAliment(),
+            'quantite' => $menu->getQteAliment(),
+        ]);
+    }
+
     #[Route('/api/menus', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $em): JsonResponse
     {

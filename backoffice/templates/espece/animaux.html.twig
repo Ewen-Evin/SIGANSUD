@@ -3,15 +3,18 @@
 {% block title %}Animaux - {{ espece.nom }} - SIGEANSUD{% endblock %}
 
 {% block body %}
-<div class="mb-4">
-    <a href="{{ path('espece_index') }}" class="btn btn-secondary btn-sm">
-        <i class="bi bi-arrow-left"></i> Retour aux especes
+<a href="{{ path('espece_index') }}" class="btn btn-secondary btn-sm mb-3">
+    <i class="bi bi-arrow-left"></i> Retour aux especes
+</a>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-bug"></i> Animaux - {{ espece.nom }}</h2>
+    <a href="{{ path('espece_animal_new', {id: espece.id}) }}" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Ajouter un animal
     </a>
 </div>
 
-<h2><i class="bi bi-bug"></i> Animaux - {{ espece.nom }}</h2>
-
-<div class="card mt-3">
+<div class="card">
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-hover mb-0">
@@ -20,7 +23,8 @@
                         <th>Nom de bapteme</th>
                         <th>Date de naissance</th>
                         <th>Genre</th>
-                        <th>Date de deces</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +39,32 @@
                                 <span class="badge bg-danger">Femelle</span>
                             {% endif %}
                         </td>
-                        <td>{{ animal.dateDeces ?? 'Vivant' }}</td>
+                        <td>
+                            {% if animal.dateDeces %}
+                                <span class="badge bg-secondary">Decede ({{ animal.dateDeces }})</span>
+                            {% else %}
+                                <span class="badge bg-success">Vivant</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ path('espece_animal_edit', {id: espece.id, nomBapteme: animal.nomBapteme}) }}"
+                                   class="btn btn-warning" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form method="post" action="{{ path('espece_animal_delete', {id: espece.id, nomBapteme: animal.nomBapteme}) }}"
+                                      style="display:inline"
+                                      onsubmit="return confirm('Supprimer cet animal ?')">
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="4" class="text-center text-muted py-4">Aucun animal pour cette espece.</td>
+                        <td colspan="5" class="text-center text-muted py-4">Aucun animal pour cette espece.</td>
                     </tr>
                     {% endfor %}
                 </tbody>

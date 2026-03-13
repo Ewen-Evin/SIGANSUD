@@ -71,6 +71,21 @@ class ApiService
         return $this->get('/api/especes');
     }
 
+    public function createEspece(array $data): array
+    {
+        return $this->post('/api/especes', $data);
+    }
+
+    public function updateEspece(int $id, array $data): array
+    {
+        return $this->put('/api/especes/' . $id, $data);
+    }
+
+    public function deleteEspece(int $id): void
+    {
+        $this->delete('/api/especes/' . $id);
+    }
+
     public function getEspeceAnimaux(int $especeId): array
     {
         return $this->get('/api/especes/' . $especeId . '/animaux');
@@ -79,6 +94,21 @@ class ApiService
     public function getEspeceMenus(int $especeId): array
     {
         return $this->get('/api/especes/' . $especeId . '/menus');
+    }
+
+    public function createAnimal(int $especeId, array $data): array
+    {
+        return $this->post('/api/especes/' . $especeId . '/animaux', $data);
+    }
+
+    public function updateAnimal(int $especeId, string $nomBapteme, array $data): array
+    {
+        return $this->put('/api/especes/' . $especeId . '/animaux/' . urlencode($nomBapteme), $data);
+    }
+
+    public function deleteAnimal(int $especeId, string $nomBapteme): void
+    {
+        $this->delete('/api/especes/' . $especeId . '/animaux/' . urlencode($nomBapteme));
     }
 
     public function recommanderMenu(int $especeId, int $menuId): array
