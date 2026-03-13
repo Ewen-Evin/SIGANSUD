@@ -18,14 +18,14 @@
 ## Phase 1 - Analyse et conception (seances 1-2)
 
 ### 1.1 Base de donnees
-- [ ] Valider/adapter le MCD fourni en annexe
-- [ ] Creer le MLD (modele logique) a partir du MCD
-- [ ] Ecrire le script SQL de creation de la BDD MySQL
-- [ ] Inserer un jeu de donnees de test coherent
+- [x] Valider/adapter le MCD fourni en annexe (partie entouree uniquement)
+- [x] Creer le MLD (modele logique) a partir du MCD
+- [x] Ecrire le script SQL de creation de la BDD MySQL (api/sql/sigansud.sql)
+- [x] Inserer un jeu de donnees de test coherent
 
 ### 1.2 Documentation initiale
-- [ ] Realiser le MOT ou diagramme de sequence (valide par le prof en seance 1)
-- [ ] Rediger la specification de l'API REST (tableau : fonction, adresse, type, entree, sortie, web/android)
+- [x] Realiser le MOT ou diagramme de sequence (valide par le prof en seance 1)
+- [x] Rediger la specification de l'API REST (docs/specification_api.md)
 - [ ] Creer le diagramme de classes
 - [ ] Maquetter les ecrans (back-office web + app mobile)
 
@@ -43,11 +43,12 @@
 - [ ] Creer les entites Doctrine depuis le MCD :
   - [ ] Soignant
   - [ ] Espece
-  - [ ] Animal
+  - [ ] Animal (PK composite : id_Espece + nomBapteme)
   - [ ] Menu
-  - [ ] Repas
-  - [ ] Enclos
-  - [ ] Objet (+ heritage Obj_Parc / Obj_Asso)
+  - [ ] DateRepas
+  - [ ] Repas (PK composite : date + espece + animal)
+  - [ ] Recommander
+  - [ ] Specialiser
 - [ ] Generer et executer les migrations
 
 ### 2.2 Endpoints API
