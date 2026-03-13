@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menus - {{ espece.nom }} - SIGEANSUD{% endblock %}
+
+{% block body %}
+<div class="mb-4">
+    <a href="{{ path('espece_index') }}" class="btn btn-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> Retour aux especes
+    </a>
+</div>
+
+<h2><i class="bi bi-cup-straw"></i> Menus recommandes - {{ espece.nom }}</h2>
+
+<div class="row g-4 mt-2">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Menus recommandes</h5>
+            </div>
+            <div class="card-body">
+                {% if menusRecommandes|length > 0 %}
+                    {% for menu in menusRecommandes %}
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                        <span>
+                            <strong>{{ menu.aliment }}</strong>
+                            <small class="text-muted">({{ menu.quantite }} kg)</small>
+                        </span>
+                        <form method="post" style="display:inline">
+                            <input type="hidden" name="action" value="retirer">
+                            <input type="hidden" name="menu_id" value="{{ menu.id }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"
+                                    onclick="return confirm('Retirer ce menu ?')">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center">Aucun menu recommande.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">Menus disponibles</h5>
+            </div>
+            <div class="card-body">
+                {% if menusDisponibles|length > 0 %}
+                    {% for menu in menusDisponibles %}
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 bg-light rounded">
+                        <span>
+                            <strong>{{ menu.aliment }}</strong>
+                            <small class="text-muted">({{ menu.quantite }} kg)</small>
+                        </span>
+                        <form method="post" style="display:inline">
+                            <input type="hidden" name="action" value="recommander">
+                            <input type="hidden" name="menu_id" value="{{ menu.id }}">
+                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                <i class="bi bi-plus-lg"></i> Recommander
+                            </button>
+                        </form>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted text-center">Tous les menus sont deja recommandes.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

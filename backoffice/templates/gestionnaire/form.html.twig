@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ action }} un gestionnaire - SIGEANSUD{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-shield-lock"></i> {{ action }} un gestionnaire</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="login" class="form-label">Login</label>
+                        <input type="text" class="form-control" id="login" name="login"
+                               value="{{ gestionnaire ? gestionnaire.login : '' }}"
+                               {{ gestionnaire ? 'readonly' : 'required' }}
+                               placeholder="Ex: jean.dupont">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mot_de_passe" class="form-label">
+                            Mot de passe {{ gestionnaire ? '(laisser vide pour ne pas changer)' : '' }}
+                        </label>
+                        <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe"
+                               {{ gestionnaire ? '' : 'required' }}>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom"
+                                   value="{{ gestionnaire ? gestionnaire.nom : '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prenom" class="form-label">Prenom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom"
+                                   value="{{ gestionnaire ? gestionnaire.prenom : '' }}" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 mt-3">
+                        <label for="role" class="form-label">Role</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="gestionnaire" {{ gestionnaire and gestionnaire.role == 'gestionnaire' ? 'selected' : '' }}>
+                                Gestionnaire
+                            </option>
+                            <option value="admin" {{ gestionnaire and gestionnaire.role == 'admin' ? 'selected' : '' }}>
+                                Administrateur
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg"></i> {{ action }}
+                        </button>
+                        <a href="{{ path('gestionnaire_index') }}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
