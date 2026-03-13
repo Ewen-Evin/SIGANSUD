@@ -38,35 +38,35 @@
 ## Phase 2 - API REST Symfony (seances 2-3)
 
 ### 2.1 Setup du projet API
-- [ ] Installer les dependances Symfony (doctrine, serializer, validator, security)
-- [ ] Configurer la connexion MySQL dans .env
-- [ ] Creer les entites Doctrine depuis le MCD :
-  - [ ] Soignant
-  - [ ] Espece
-  - [ ] Animal (PK composite : id_Espece + nomBapteme)
-  - [ ] Menu
-  - [ ] DateRepas
-  - [ ] Repas (PK composite : date + espece + animal)
+- [x] Installer les dependances Symfony (doctrine, serializer, validator, security)
+- [x] Configurer la connexion MySQL dans .env
+- [x] Creer les entites Doctrine depuis le MCD :
+  - [x] Soignant
+  - [x] Espece
+  - [x] Animal (PK composite : id_Espece + nomBapteme)
+  - [x] Menu
+  - [x] DateRepas
+  - [x] Repas (PK composite : date + espece + animal)
   - [ ] Recommander
   - [ ] Specialiser
-- [ ] Generer et executer les migrations
+- [x] Generer et executer les migrations
 
 ### 2.2 Endpoints API
-- [ ] POST /api/login - Authentification soignant
-- [ ] GET /api/soignants - Liste des soignants
-- [ ] GET /api/soignants/{id} - Detail soignant
-- [ ] POST/PUT/DELETE /api/soignants - CRUD soignant
-- [ ] GET /api/especes - Liste des especes
-- [ ] GET /api/especes/{id}/animaux - Animaux d'une espece
-- [ ] GET /api/especes/{id}/menu - Menu d'une espece
-- [ ] POST/PUT/DELETE /api/menus - CRUD menus
-- [ ] GET /api/soignants/{id}/especes - Especes du soignant
-- [ ] POST /api/repas - Enregistrer un repas (heure + quantite)
-- [ ] GET /api/repas?animal={id}&date={date} - Consulter les repas
+- [x] POST /api/login - Authentification soignant
+- [x] GET /api/soignants - Liste des soignants
+- [x] GET /api/soignants/{id} - Detail soignant
+- [x] POST/PUT/DELETE /api/soignants - CRUD soignant
+- [x] GET /api/especes - Liste des especes
+- [x] GET /api/especes/{id}/animaux - Animaux d'une espece
+- [x] GET /api/especes/{id}/menu - Menu d'une espece
+- [x] POST/PUT/DELETE /api/menus - CRUD menus
+- [x] GET /api/soignants/{id}/especes - Especes du soignant
+- [x] POST /api/repas - Enregistrer un repas (heure + quantite)
+- [x] GET /api/repas?animal={id}&date={date} - Consulter les repas
 
 ### 2.3 Securite API
-- [ ] Authentification JWT ou token simple
-- [ ] Validation des donnees entrantes
+- [x] Authentification JWT ou token simple
+- [x] Validation des donnees entrantes
 
 ---
 
