@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animaux - {{ espece.nom }} - SIGEANSUD{% endblock %}
+
+{% block body %}
+<div class="mb-4">
+    <a href="{{ path('espece_index') }}" class="btn btn-secondary btn-sm">
+        <i class="bi bi-arrow-left"></i> Retour aux especes
+    </a>
+</div>
+
+<h2><i class="bi bi-bug"></i> Animaux - {{ espece.nom }}</h2>
+
+<div class="card mt-3">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Nom de bapteme</th>
+                        <th>Date de naissance</th>
+                        <th>Genre</th>
+                        <th>Date de deces</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for animal in animaux %}
+                    <tr>
+                        <td><strong>{{ animal.nomBapteme }}</strong></td>
+                        <td>{{ animal.dateNaissance ?? '-' }}</td>
+                        <td>
+                            {% if animal.genre == 'M' %}
+                                <span class="badge bg-primary">Male</span>
+                            {% else %}
+                                <span class="badge bg-danger">Femelle</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ animal.dateDeces ?? 'Vivant' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">Aucun animal pour cette espece.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

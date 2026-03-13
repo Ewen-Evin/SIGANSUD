@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaires - SIGEANSUD{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-shield-lock"></i> Gestionnaires</h2>
+    <a href="{{ path('gestionnaire_new') }}" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Ajouter un gestionnaire
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Login</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for g in gestionnaires %}
+                    <tr>
+                        <td>{{ g.id }}</td>
+                        <td><strong>{{ g.login }}</strong></td>
+                        <td>{{ g.nom }}</td>
+                        <td>{{ g.prenom }}</td>
+                        <td>
+                            {% if g.role == 'admin' %}
+                                <span class="badge bg-danger">Admin</span>
+                            {% else %}
+                                <span class="badge bg-primary">Gestionnaire</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ path('gestionnaire_edit', {id: g.id}) }}"
+                                   class="btn btn-warning" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                {% if g.id != app.session.get('gestionnaire').id %}
+                                <form method="post" action="{{ path('gestionnaire_delete', {id: g.id}) }}"
+                                      style="display:inline"
+                                      onsubmit="return confirm('Supprimer ce gestionnaire ?')">
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">Aucun gestionnaire.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

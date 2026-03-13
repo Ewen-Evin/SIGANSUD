@@ -49,6 +49,16 @@ CREATE TABLE Animal(
    CONSTRAINT fk_animal_espece FOREIGN KEY(id_Espece) REFERENCES Espece(id_Espece)
 ) ENGINE=InnoDB;
 
+CREATE TABLE Gestionnaire(
+   id_Gestionnaire INT AUTO_INCREMENT,
+   login_Gestionnaire VARCHAR(50) NOT NULL UNIQUE,
+   mot_de_passe VARCHAR(255) NOT NULL,
+   nom_Gestionnaire VARCHAR(50) NOT NULL,
+   prenom_Gestionnaire VARCHAR(50) NOT NULL,
+   role_Gestionnaire VARCHAR(20) NOT NULL DEFAULT 'gestionnaire',
+   PRIMARY KEY(id_Gestionnaire)
+) ENGINE=InnoDB;
+
 -- ============================================
 -- TABLES D'ASSOCIATION
 -- ============================================
@@ -102,6 +112,10 @@ INSERT INTO Soignant (matricule_Soignant, nom_Soignant, prenom_Soignant, tel_soi
 ('SOI001', 'Dupont', 'Marie', '0601020304', '12 rue des Acacias, Sigean', '$2y$12$/U/iCa/9XJ42OG3qycHYOunihXC2jVMaVY3T9d7RlP1/9Feu7.z1y'),
 ('SOI002', 'Martin', 'Pierre', '0605060708', '5 avenue du Parc, Sigean', '$2y$12$UbePij0BORwQAYKwWMUS..alqIQQLX6GiGoLzWfhwwYHPajr/Rsda'),
 ('SOI003', 'Durand', 'Sophie', '0609101112', '8 place de la Fontaine, Narbonne', '$2y$12$2DSwnFApkKGg.DR1dD1zyOSa8AoRgQlzPji2uzxVNn78LrkRnHdg2');
+
+-- Gestionnaires (admin par defaut, mdp: admin)
+INSERT INTO Gestionnaire (login_Gestionnaire, mot_de_passe, nom_Gestionnaire, prenom_Gestionnaire, role_Gestionnaire) VALUES
+('admin', '$2y$12$pNZj6VPNqILKznkz7Xnbh.dEdeGlaDiecVCjQBb4NmRZqaqxvzu4G', 'Administrateur', 'Systeme', 'admin');
 
 -- Specialisations (max 3 especes par soignant)
 INSERT INTO specialiser (id_Espece, matricule_Soignant) VALUES

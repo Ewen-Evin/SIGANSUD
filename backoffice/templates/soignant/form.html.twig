@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ action }} un soignant - SIGEANSUD{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0"><i class="bi bi-person-plus"></i> {{ action }} un soignant</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="matricule" class="form-label">Matricule</label>
+                            <input type="text" class="form-control" id="matricule" name="matricule"
+                                   value="{{ soignant ? soignant.matricule : '' }}"
+                                   {{ soignant ? 'readonly' : 'required' }}
+                                   placeholder="Ex: SOI004">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="mot_de_passe" class="form-label">
+                                Mot de passe {{ soignant ? '(laisser vide pour ne pas changer)' : '' }}
+                            </label>
+                            <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe"
+                                   {{ soignant ? '' : 'required' }}>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom"
+                                   value="{{ soignant ? soignant.nom : '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="prenom" class="form-label">Prenom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom"
+                                   value="{{ soignant ? soignant.prenom : '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tel" class="form-label">Telephone</label>
+                            <input type="tel" class="form-control" id="tel" name="tel"
+                                   value="{{ soignant ? soignant.tel : '' }}"
+                                   placeholder="0601020304">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="adresse" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="adresse" name="adresse"
+                                   value="{{ soignant ? soignant.adresse : '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg"></i> {{ action }}
+                        </button>
+                        <a href="{{ path('soignant_index') }}" class="btn btn-secondary">Annuler</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

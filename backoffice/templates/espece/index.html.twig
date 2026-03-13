@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Especes - SIGEANSUD{% endblock %}
+
+{% block body %}
+<h2 class="mb-4"><i class="bi bi-bug"></i> Especes</h2>
+
+<div class="row g-4">
+    {% for espece in especes %}
+    <div class="col-md-4 col-sm-6">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bug hero-icon"></i>
+                <h5 class="card-title mt-2">{{ espece.nom }}</h5>
+                <p class="text-muted">ID : {{ espece.id }}</p>
+                <div class="d-flex gap-2 justify-content-center">
+                    <a href="{{ path('espece_animaux', {id: espece.id}) }}" class="btn btn-sm btn-primary">
+                        <i class="bi bi-list"></i> Animaux
+                    </a>
+                    <a href="{{ path('espece_menus', {id: espece.id}) }}" class="btn btn-sm btn-warning">
+                        <i class="bi bi-cup-straw"></i> Menus
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+        <p class="text-muted text-center">Aucune espece enregistree.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
