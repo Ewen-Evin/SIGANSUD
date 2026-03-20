@@ -48,6 +48,25 @@ php -S localhost:8001 -t public
 | API         | http://localhost:8000 |
 | Back-office | http://localhost:8001 |
 
+## Tests unitaires
+
+### Lancer les tests de l'API
+```bash
+cd api
+php bin/phpunit
+```
+
+### Lancer les tests du back-office
+```bash
+cd backoffice
+php bin/phpunit
+```
+
+### Lancer tous les tests
+```bash
+cd api && php bin/phpunit && cd ../backoffice && php bin/phpunit
+```
+
 ## Equipe
 
 - Mateo
