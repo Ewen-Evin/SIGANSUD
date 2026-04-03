@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PPE4</string>
+    <string name="repas_quantite_format">%1$.1f g donnés</string>
+    <string name="repas_observation_format">📝 %1$s</string>
+    <string name="repas_valide">✓ Validé</string>
+    <string name="repas_en_attente">En attente</string>
+    <string name="repas_soignant_format">Par %1$s</string>
+</resources>

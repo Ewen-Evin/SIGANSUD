@@ -3,7 +3,16 @@
 {% block title %}Especes - SIGEANSUD{% endblock %}
 
 {% block body %}
-<h2 class="mb-4"><i class="bi bi-bug"></i> Especes</h2>
+<a href="{{ path('dashboard') }}" class="btn btn-secondary btn-sm mb-3">
+    <i class="bi bi-arrow-left"></i> Retour a l'accueil
+</a>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-bug"></i> Especes</h2>
+    <a href="{{ path('espece_new') }}" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i> Ajouter une espece
+    </a>
+</div>
 
 <div class="row g-4">
     {% for espece in especes %}
@@ -12,14 +21,25 @@
             <div class="card-body text-center">
                 <i class="bi bi-bug hero-icon"></i>
                 <h5 class="card-title mt-2">{{ espece.nom }}</h5>
-                <p class="text-muted">ID : {{ espece.id }}</p>
-                <div class="d-flex gap-2 justify-content-center">
+                <div class="d-flex gap-2 justify-content-center mb-3">
                     <a href="{{ path('espece_animaux', {id: espece.id}) }}" class="btn btn-sm btn-primary">
                         <i class="bi bi-list"></i> Animaux
                     </a>
                     <a href="{{ path('espece_menus', {id: espece.id}) }}" class="btn btn-sm btn-warning">
                         <i class="bi bi-cup-straw"></i> Menus
                     </a>
+                </div>
+                <div class="d-flex gap-2 justify-content-center">
+                    <a href="{{ path('espece_edit', {id: espece.id}) }}" class="btn btn-sm btn-outline-warning" title="Modifier">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <form method="post" action="{{ path('espece_delete', {id: espece.id}) }}"
+                          style="display:inline"
+                          onsubmit="return confirm('Supprimer cette espece ?')">
+                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Supprimer">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
