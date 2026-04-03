@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Couleurs principales de l'application -->
+    <color name="primary">#2E7D32</color> <!-- Vert forêt -->
+    <color name="primary_dark">#1B5E20</color>
+    <color name="primary_light">#E8F5E9</color> <!-- Vert très clair -->
+    <color name="accent">#FFA000</color> <!-- Ambre/Orange -->
+    
+    <!-- Couleurs d'état -->
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+    <color name="blue">#2196F3</color>
+    <color name="red">#F44336</color>
+    
+    <!-- Gris pour les fonds et textes secondaires -->
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#9E9E9E</color>
+
+    <!-- Couleurs manquantes pour les layouts -->
+    <color name="background">#FAFAFA</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="divider">#BDBDBD</color>
+</resources>

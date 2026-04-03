@@ -24,19 +24,26 @@ AP4/
 
 ### Prerequis
 - PHP 8.5, MySQL (Laragon), Symfony CLI
-- Base de donnees `sigansud` importee depuis `api/sql/sigansud.sql`
+- Android Studio (pour l'app mobile)
+- Base de donnees `sigansud` importee depuis `sigansud.sql` (ou `api/sql/sigansud.sql`)
 
 ### 1. Lancer l'API (obligatoire, a faire en premier)
 ```bash
 cd api
-php -S localhost:8000 -t public
+php -S 0.0.0.0:8000 -t public
 ```
+> Note : utiliser `0.0.0.0` au lieu de `localhost` pour que l'emulateur Android puisse acceder a l'API.
 
 ### 2. Lancer le back-office (dans un autre terminal)
 ```bash
 cd backoffice
 php -S localhost:8001 -t public
 ```
+
+### 3. Lancer l'app mobile
+- Ouvrir le dossier `mobile/` dans Android Studio
+- Lancer sur un emulateur (l'API est accessible via `10.0.2.2:8000`)
+- Ou sur un telephone physique (modifier l'IP dans `RetrofitClient.java`)
 
 ### Comptes de test
 
