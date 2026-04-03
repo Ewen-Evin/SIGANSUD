@@ -108,14 +108,16 @@ INSERT INTO Espece (id_Espece, nom_Espece) VALUES
 (6, 'Flamant rose');
 
 -- Soignants
+-- Soignants (mdp: soignant)
 INSERT INTO Soignant (matricule_Soignant, nom_Soignant, prenom_Soignant, tel_soignant, adresse_Soignant, mot_de_passe) VALUES
-('SOI001', 'Dupont', 'Marie', '0601020304', '12 rue des Acacias, Sigean', '$2y$12$/U/iCa/9XJ42OG3qycHYOunihXC2jVMaVY3T9d7RlP1/9Feu7.z1y'),
-('SOI002', 'Martin', 'Pierre', '0605060708', '5 avenue du Parc, Sigean', '$2y$12$UbePij0BORwQAYKwWMUS..alqIQQLX6GiGoLzWfhwwYHPajr/Rsda'),
-('SOI003', 'Durand', 'Sophie', '0609101112', '8 place de la Fontaine, Narbonne', '$2y$12$2DSwnFApkKGg.DR1dD1zyOSa8AoRgQlzPji2uzxVNn78LrkRnHdg2');
+('SOI001', 'Dupont', 'Marie', '0601020304', '12 rue des Acacias, Sigean', '$2y$12$71Q3nhK.WZpjzP2R/2EAquWD7cvvSslk6fiWNWjhws60PMYCAiQCG'),
+('SOI002', 'Martin', 'Pierre', '0605060708', '5 avenue du Parc, Sigean', '$2y$12$71Q3nhK.WZpjzP2R/2EAquWD7cvvSslk6fiWNWjhws60PMYCAiQCG'),
+('SOI003', 'Durand', 'Sophie', '0609101112', '8 place de la Fontaine, Narbonne', '$2y$12$71Q3nhK.WZpjzP2R/2EAquWD7cvvSslk6fiWNWjhws60PMYCAiQCG');
 
--- Gestionnaires (admin par defaut, mdp: admin)
+-- Gestionnaires (mdp: admin)
 INSERT INTO Gestionnaire (login_Gestionnaire, mot_de_passe, nom_Gestionnaire, prenom_Gestionnaire, role_Gestionnaire) VALUES
-('admin', '$2y$12$TX5EtklOyAPL/IKgZV.zt.6/hqB8nHrCmbUQDG6W6W/hlkpbzrQ6.', 'Administrateur', 'Systeme', 'admin');
+('admin', '$2y$12$TX5EtklOyAPL/IKgZV.zt.6/hqB8nHrCmbUQDG6W6W/hlkpbzrQ6.', 'Administrateur', 'Systeme', 'admin'),
+('admin2', '$2y$12$iE/Q0RJOUfUUlMUOkW8o6OmnMEdoSRXsqTu7D8EZIQ3bFvZBz6fxq', 'Ewen', 'Ewen', 'gestionnaire');
 
 -- Specialisations (max 3 especes par soignant)
 INSERT INTO specialiser (id_Espece, matricule_Soignant) VALUES

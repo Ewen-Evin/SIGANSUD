@@ -38,9 +38,20 @@ cd backoffice
 php -S localhost:8001 -t public
 ```
 
-### Connexion back-office
-- **Login** : `admin`
-- **Mot de passe** : `admin`
+### Comptes de test
+
+#### Back-office (gestionnaires)
+| Login   | Mot de passe | Role          |
+|---------|-------------|---------------|
+| admin   | admin       | admin         |
+| admin2  | admin       | gestionnaire  |
+
+#### API / App mobile (soignants)
+| Matricule | Nom             | Mot de passe |
+|-----------|-----------------|-------------|
+| SOI001    | Dupont Marie    | soignant    |
+| SOI002    | Martin Pierre   | soignant    |
+| SOI003    | Durand Sophie   | soignant    |
 
 ### Ports
 | Module      | URL                  |
