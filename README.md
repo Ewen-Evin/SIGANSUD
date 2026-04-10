@@ -85,6 +85,15 @@ php bin/phpunit
 cd api && php bin/phpunit && cd ../backoffice && php bin/phpunit
 ```
 
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [docs/api.md](docs/api.md) | Installation et lancement de l'API REST |
+| [docs/backoffice.md](docs/backoffice.md) | Installation et lancement du back-office |
+| [docs/mobile.md](docs/mobile.md) | Installation et lancement de l'app Android |
+| [docs/specification_api.md](docs/specification_api.md) | Specification complete des endpoints API |
+
 ## Equipe
 
 - Mateo
