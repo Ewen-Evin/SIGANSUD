@@ -6,11 +6,23 @@ Toutes les reponses sont en **JSON**.
 
 ---
 
-## Authentification
+## Authentification soignant
 
 | Fonction | Adresse | Type | Entree | Sortie | Web | Android |
 |----------|---------|------|--------|--------|-----|---------|
 | Connexion soignant | /api/login | POST | matricule, mot_de_passe | token + infos soignant | NON | OUI |
+
+---
+
+## Gestionnaires
+
+| Fonction | Adresse | Type | Entree | Sortie | Web | Android |
+|----------|---------|------|--------|--------|-----|---------|
+| Connexion gestionnaire | /api/gestionnaires/login | POST | login, mot_de_passe | token + infos gestionnaire | OUI | NON |
+| Liste des gestionnaires | /api/gestionnaires | GET | | liste gestionnaires : id, login, nom, prenom, role | OUI | NON |
+| Creer un gestionnaire | /api/gestionnaires | POST | login, nom, prenom, mot_de_passe, role | gestionnaire cree | OUI | NON |
+| Modifier un gestionnaire | /api/gestionnaires/{id} | PUT | nom, prenom, role, mot_de_passe | gestionnaire modifie | OUI | NON |
+| Supprimer un gestionnaire | /api/gestionnaires/{id} | DELETE | | confirmation | OUI | NON |
 
 ---
 
