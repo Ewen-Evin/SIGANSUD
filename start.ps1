@@ -7,7 +7,7 @@
 
 $API_PORT  = 8000
 $BO_PORT   = 8001
-$ROOT      = "C:\laragon\www\AP4"
+$ROOT      = $PSScriptRoot
 $API_DIR   = "$ROOT\api"
 $BO_DIR    = "$ROOT\backoffice"
 $SQL_FILE  = "$ROOT\sigansud.sql"
@@ -25,6 +25,31 @@ if ($laragonPaths) {
     $mysqlExe = "mysql"
 }
 
+# --- Recherche de php.exe (Laragon ou PATH) ---
+$phpExe = $null
+$phpPaths = Get-ChildItem "C:\laragon\bin\php" -ErrorAction SilentlyContinue |
+    Where-Object { $_.PSIsContainer } |
+    ForEach-Object { "$($_.FullName)\php.exe" } |
+    Where-Object { Test-Path $_ }
+
+if ($phpPaths) {
+    $phpExe = $phpPaths | Select-Object -Last 1
+} elseif (Get-Command php -ErrorAction SilentlyContinue) {
+    $phpExe = (Get-Command php).Source
+}
+
+if (-not $phpExe) {
+    Write-Host "  ERREUR : php.exe introuvable. Verifie que Laragon est installe." -ForegroundColor Red
+    exit 1
+}
+
+# --- Recherche de Chrome ---
+$chromeExe = @(
+    "$env:ProgramFiles\Google\Chrome\Application\chrome.exe",
+    "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe",
+    "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe"
+) | Where-Object { Test-Path $_ } | Select-Object -First 1
+
 # --- Import de la base de donnees ---
 Write-Host ""
 if ($mysqlExe) {
@@ -41,18 +66,37 @@ if ($mysqlExe) {
 
 # --- Lancement des serveurs en arriere-plan ---
 # API sur 0.0.0.0 pour que l'emulateur Android puisse y acceder via 10.0.2.2
+$apiLog = "$ROOT\api_server.log"
+$boLog  = "$ROOT\bo_server.log"
+
 Write-Host ""
 Write-Host "  Lancement de l'API sur le port $API_PORT ..."
-$apiProc = Start-Process php `
-    -ArgumentList "-S 0.0.0.0:$API_PORT -t public" `
+$apiProc = Start-Process $phpExe `
+    -ArgumentList "-S 0.0.0.0:$API_PORT -t public public/index.php" `
     -WorkingDirectory $API_DIR `
-    -PassThru -WindowStyle Minimized
+    -RedirectStandardError $apiLog -WindowStyle Hidden -PassThru
 
 Write-Host "  Lancement du back-office sur le port $BO_PORT ..."
-$boProc = Start-Process php `
-    -ArgumentList "-S localhost:$BO_PORT -t public" `
+$boProc = Start-Process $phpExe `
+    -ArgumentList "-S localhost:$BO_PORT -t public public/index.php" `
     -WorkingDirectory $BO_DIR `
-    -PassThru -WindowStyle Minimized
+    -RedirectStandardError $boLog -WindowStyle Hidden -PassThru
+
+Start-Sleep 2
+if ($apiProc.HasExited) {
+    Write-Host ""
+    Write-Host "  ERREUR : l'API a crashe au demarrage. Log :" -ForegroundColor Red
+    Get-Content $apiLog -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "    $_" -ForegroundColor Red }
+    if (-not $boProc.HasExited) { $boProc.Kill() }
+    exit 1
+}
+if ($boProc.HasExited) {
+    Write-Host ""
+    Write-Host "  ERREUR : le back-office a crashe au demarrage. Log :" -ForegroundColor Red
+    Get-Content $boLog -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "    $_" -ForegroundColor Red }
+    $apiProc.Kill()
+    exit 1
+}
 
 # --- Attente que l'API reponde ---
 Write-Host ""
@@ -83,15 +127,21 @@ if (-not $ready) {
     Write-Host ""
     Write-Host "  Appuie sur une touche pour quitter..."
     $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    $apiProc.Kill()
-    $boProc.Kill()
+    if (-not $apiProc.HasExited) { $apiProc.Kill() }
+    if (-not $boProc.HasExited)  { $boProc.Kill() }
     exit 1
 }
 
 # --- Ouverture du navigateur ---
-Start-Process "http://localhost:$BO_PORT"
-Start-Sleep 1
-Start-Process "http://localhost:$API_PORT"
+if ($chromeExe) {
+    Start-Process $chromeExe "http://localhost:$BO_PORT"
+    Start-Sleep 1
+    Start-Process $chromeExe "http://localhost:$API_PORT"
+} else {
+    Start-Process "http://localhost:$BO_PORT"
+    Start-Sleep 1
+    Start-Process "http://localhost:$API_PORT"
+}
 
 # --- Infos ---
 Write-Host ""
@@ -119,7 +169,8 @@ $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 # --- Nettoyage ---
 Write-Host ""
 Write-Host "  Arret des serveurs..."
-$apiProc.Kill()
-$boProc.Kill()
+if (-not $apiProc.HasExited) { $apiProc.Kill() }
+if (-not $boProc.HasExited)  { $boProc.Kill() }
+Remove-Item $apiLog, $boLog -ErrorAction SilentlyContinue
 Write-Host "  Bye !"
 Write-Host ""
